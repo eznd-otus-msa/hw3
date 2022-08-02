@@ -2,6 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "otus-msa-hw3.fullname" . }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8000"
   labels:
     {{- include "otus-msa-hw3.labels" . | nindent 4 }}
 spec:

@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/ansrivas/fiberprometheus/v2"
+	"github.com/eznd-otus-msa/hw3/app/internal/transport/server/httpmw"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/jinzhu/configor"
 
 	"gorm.io/driver/postgres"
@@ -44,12 +46,14 @@ func main() {
 
 	srv := fiber.New(fiber.Config{})
 
-	prometheus := fiberprometheus.New("otus-msa-hw3")
+	prometheus := httpmw.New("otus-msa-hw3")
 	prometheus.RegisterAt(srv, "/metrics")
 	srv.Use(prometheus.Middleware)
 
 	srv.Use(logger.New())
-	srv.Use(http.NewChaosMonkeyMw())
+	srv.Use(favicon.New())
+	srv.Use(recover.New())
+	srv.Use(httpmw.NewChaosMonkeyMw())
 
 	api := srv.Group("/api")
 

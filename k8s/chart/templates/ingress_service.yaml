@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx-monitor
+  namespace: ingress-nginx
+  labels:
+    app-monitor: ingress-nginx
+spec:
+  ports:
+    - name: httpmetric
+      protocol: TCP
+      appProtocol: http
+      port: 80
+      targetPort: 10254
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
