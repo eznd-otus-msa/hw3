@@ -1,9 +1,9 @@
-replicaCount: 3
+replicaCount: 1
 
 image:
   repository: eznd/otus-msa-hw3
   pullPolicy: IfNotPresent
-  tag: v0.0.2
+  tag: v0.0.5
   command: ["/app/service"]
   migrateCommand: ["/entrypoint-migrate.sh"]
 

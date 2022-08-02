@@ -5,9 +5,6 @@ metadata:
   namespace: ingress-nginx
 spec:
   jobLabel: ingress-nginx
-  namespaceSelector:
-    matchNames:
-      - ingress-nginx
   selector:
     matchLabels:
       app-monitor: ingress-nginx

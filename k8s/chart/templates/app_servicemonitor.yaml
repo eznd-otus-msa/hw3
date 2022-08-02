@@ -9,7 +9,7 @@ spec:
     - port: http
       scheme: http
       path: /metrics
-      interval: 30s
+      interval: 5s
   selector:
     matchLabels:
       {{- include "otus-msa-hw3.selectorLabels" . | nindent 6 }}
